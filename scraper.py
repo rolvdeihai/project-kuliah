@@ -1,6 +1,5 @@
 import os
 import time
-import selenium
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -11,6 +10,9 @@ from webdriver_manager.chrome import ChromeDriverManager as CM
 from collections import Counter
 import random
 from instabot import Bot
+import glob
+#cookie_del = glob.glob("config/*cookie.json")
+#if cookie_del : os.remove(cookie_del[0])
 #from main import USERNAME, PASSWORD
 
 # Complete these 2 fields ==================
@@ -23,23 +25,25 @@ TIMEOUT = 50
 def interact(user, pw):
     bot = Bot();
     bot.login(username = user, password = pw);
-    f = open("followers.txt", "r");
-    followers_list = str(list(f));
-    followers_list = list(followers_list.split("\n"))
-
-    for j in range(0, len(followers_list)):
-        followers_amount = bot.get_user_followers(followers_list[j])
-        length = len(followers_amount)
-        if(length >= 50 and length <= 5000):
-            bot.follow(followers_list[j])
-            time.sleep(2)
-            bot.like_user(followers_list[j], amount = 4)
-            time.sleep(2)
-            media = bot.get_last_user_medias(user_id=bot.get_user_id_from_username(followers_list[j]))
-            bot.comment(media, "Mantapp!!")
-            time.sleep(3)
-            bot.send_message("Permisi kak, minta tolong follbacknya boleh ya kalo enjoy sama konten kami :)", followers_list[j])
-            time.sleep(10)
+    time.sleep(5)
+    bot.follow("shiro.kage.r")
+    # f = open("followers.txt", "r");
+    # followers_list = str(list(f));
+    # followers_list = list(followers_list.split("\n"))
+    #
+    # for j in range(0, len(followers_list)):
+    #     followers_amount = bot.get_user_followers(followers_list[j])
+    #     length = len(followers_amount)
+    #     if(length >= 50 and length <= 5000):
+    #         bot.follow(followers_list[j])
+    #         time.sleep(2)
+    #         bot.like_user(followers_list[j], amount = 4)
+    #         time.sleep(2)
+    #         media = bot.get_last_user_medias(user_id=bot.get_user_id_from_username(followers_list[j]))
+    #         bot.comment(media, "Mantapp!!")
+    #         time.sleep(3)
+    #         bot.send_message("Permisi kak, minta tolong follbacknya boleh ya kalo enjoy sama konten kami :)", followers_list[j])
+    #         time.sleep(10)
 
 def shuffle_list(x):
     f = open(x, "r")
